@@ -1,0 +1,181 @@
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --link-color: #333333;
+    --header-bg: #2980b9;
+    --button-bg: #27ae60;
+  }
+  
+  .dark-mode {
+    --bg-color: #333333;
+    --text-color: #ffffff;
+    --link-color: #1e1d1d;
+    --header-bg: #1a1a1a;
+    --button-bg: #2ecc71;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: var(--header-bg);
+    padding: 1rem;
+    color: white;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  button {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: darken(var(--button-bg), 10%);
+  }
+  
+  #dark-mode {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  
+  nav {
+    background-color: #f1f1f1;
+    padding: 1rem;
+  }
+  
+  nav a {
+    color: var(--link-color);
+    text-decoration: none;
+    padding: 0.5rem;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.3rem;
+    padding: 1rem;
+  }
+  
+  section {
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  section h2 {
+    margin-top: 0;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form label {
+    margin-top: 10px;
+  }
+  
+  form input, form textarea, form select {
+    width: 90%;
+    padding: 0.8rem;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  form textarea {
+    height: 100px;
+  }
+  
+  form button {
+    margin-top: 10px;
+    background-color: var(--button-bg);
+  }
+  
+  form button:hover {
+    background-color: darken(var(--button-bg), 10%);
+  }
+  
+  footer {
+    background-color: #f1f1f1;
+    color: var(--link-color);
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  
+  @media (max-width: 768px) {
+    main {
+      grid-template-columns: 1fr; 
+      gap: 1rem;
+    }
+  
+    header h1 {
+      font-size: 1.5rem; 
+    }
+  
+    button {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+  
+    form input,
+    form textarea,
+    form select {
+      padding: 0.6rem;
+      font-size: 0.9rem;
+    }
+  
+    #dark-mode {
+      top: 5px;
+      right: 5px;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+  
+    nav {
+      padding: 0.5rem;
+    }
+  
+    nav a {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  
+    footer {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  }
