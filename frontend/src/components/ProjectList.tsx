@@ -13,15 +13,19 @@ export default function ProjectList({ projects }: ProjectListProps) {
   return (
     <section id="project-list">
       <h2>Prosjektliste</h2>
-      <ul id="projects">
+      <div className="project-grid">
         {projects.map((project) => (
-          <li key={project.id}>
-            <h3>{project.name}</h3>
-            <p>{project.description}</p>
-            <p>Status: {project.status}</p>
-          </li>
+          <article key={project.id} className="project-card">
+            {/* Hvis du vil ha et bilde, kan du inkludere et standardbilde */}
+            
+            <div className="project-details">
+              <h3>{project.name}</h3>
+              <p>{project.description}</p>
+              <p>Status: {project.status}</p>
+            </div>
+          </article>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

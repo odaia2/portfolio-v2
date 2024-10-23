@@ -8,6 +8,7 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('pågående');
+  const [submitted, setSubmitted] = useState(false); // For tilbakemelding etter innsending
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,6 +16,8 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
     setTitle('');
     setDescription('');
     setStatus('pågående');
+    setSubmitted(true); // Viser tilbakemelding etter innsending
+    setTimeout(() => setSubmitted(false), 3000); // Skjul tilbakemelding etter 3 sekunder
   };
 
   return (
@@ -50,6 +53,9 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
 
         <button type="submit">Opprett prosjekt</button>
       </form>
+
+      {/* Tilbakemelding etter innsending */}
+      {submitted && <p className="success-message">Prosjektet ble opprettet!</p>}
     </section>
   );
 }
