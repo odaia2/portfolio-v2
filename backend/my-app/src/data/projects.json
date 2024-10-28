@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Demo Prosjekt",
+    "description": "Et eksempel på et prosjekt.",
+    "status": "pågående",
+    "public": true,
+    "tags": ["eksempel", "demo"],
+    "publishedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Fullført Prosjekt",
+    "description": "Et fullført prosjekt.",
+    "status": "fullført",
+    "public": false,
+    "tags": ["fullført"],
+    "publishedAt": "2023-12-01T00:00:00.000Z"
+  }
+]

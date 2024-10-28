@@ -1,23 +1,32 @@
+// src/components/CreateProject.tsx
 import React, { useState } from 'react';
+import { Project } from '../types';
 
 type CreateProjectProps = {
-  addProject: (project: { name: string; description: string; status: string }) => void;
+  addProject: (project: Omit<Project, 'id' | 'publishedAt'>) => void;
 };
 
 export default function CreateProject({ addProject }: CreateProjectProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('pågående');
-  const [submitted, setSubmitted] = useState(false); // For tilbakemelding etter innsending
+  const [status, setStatus] = useState('draft');
+  const [isPublic, setIsPublic] = useState(false);
+  const [tags, setTags] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addProject({ name: title, description, status });
+    addProject({
+      name: title,
+      description,
+      status,
+      public: isPublic,
+      tags: tags.split(',').map((tag) => tag.trim()),
+    });
     setTitle('');
     setDescription('');
-    setStatus('pågående');
-    setSubmitted(true); // Viser tilbakemelding etter innsending
-    setTimeout(() => setSubmitted(false), 3000); // Skjul tilbakemelding etter 3 sekunder
+    setStatus('draft');
+    setIsPublic(false);
+    setTags('');
   };
 
   return (
@@ -31,7 +40,6 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Skriv prosjektets tittel..."
           required
         />
 
@@ -41,21 +49,35 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Skriv prosjektbeskrivelse..."
           required
         ></textarea>
 
         <label htmlFor="status">Status:</label>
         <select id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="pågående">Pågående</option>
-          <option value="fullført">Fullført</option>
+          <option value="draft">Utkast</option>
+          <option value="published">Publisert</option>
         </select>
+
+        <label htmlFor="public">Offentlig:</label>
+        <input
+          type="checkbox"
+          id="public"
+          name="public"
+          checked={isPublic}
+          onChange={(e) => setIsPublic(e.target.checked)}
+        />
+
+        <label htmlFor="tags">Tags:</label>
+        <input
+          type="text"
+          id="tags"
+          name="tags"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
+        />
 
         <button type="submit">Opprett prosjekt</button>
       </form>
-
-      {/* Tilbakemelding etter innsending */}
-      {submitted && <p className="success-message">Prosjektet ble opprettet!</p>}
     </section>
   );
 }

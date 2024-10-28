@@ -1,41 +1,19 @@
+// src/App.tsx
 import { useState } from 'react';
+import { useProjects } from './hooks/useProjects';
 import ProjectList from './components/ProjectList';
 import CreateProject from './components/CreateProject';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import './Style/Style.css';
 
-type Project = {
-  id: number;
-  name: string;
-  description: string;
-  status: string;
-};
-
-const initialProjects = [
-  { id: 1, name: 'Prosjekt 1', description: 'Beskrivelse av prosjekt 1', status: 'Pågående' },
-  { id: 2, name: 'Prosjekt 2', description: 'Beskrivelse av prosjekt 2', status: 'Fullført' },
-  { id: 2, name: 'Prosjekt 2', description: 'Beskrivelse av prosjekt 2', status: 'Fullført' },
-  { id: 2, name: 'Prosjekt 2', description: 'Beskrivelse av prosjekt 2', status: 'Fullført' },
-  { id: 2, name: 'Prosjekt 2', description: 'Beskrivelse av prosjekt 2', status: 'Fullført' },
-  { id: 2, name: 'Prosjekt 2', description: 'Beskrivelse av prosjekt 2', status: 'Fullført' },
-  
-  
-];
-
 export default function App() {
-  const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const { projects, addProject } = useProjects();
   const [darkMode, setDarkMode] = useState(false);
 
   // Funksjon for å toggle dark mode
-  function toggleDarkMode() {
+  const toggleDarkMode = () => {
     setDarkMode(!darkMode);  // Skifter mellom dark mode og vanlig modus
-  }
-
-  // Funksjon for å legge til nytt prosjekt
-  const addProject = (project: Omit<Project, 'id'>) => {
-    const newProject = { ...project, id: Date.now() };
-    setProjects((prevProjects) => [...prevProjects, newProject]);
   };
 
   return (
@@ -44,10 +22,7 @@ export default function App() {
       <Nav />
       
       <main>
-        {/* Prosjektlisten vises øverst */}
         <ProjectList projects={projects} />
-        
-        {/* Skjema for å opprette nytt prosjekt vises nederst */}
         <CreateProject addProject={addProject} />
       </main>
       <footer>Prosjektportefølje</footer>
