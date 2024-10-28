@@ -1,4 +1,3 @@
-// src/index.ts
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
 import { cors } from 'hono/cors';
@@ -7,45 +6,74 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const app = new Hono();
-
-// Aktiver CORS for å tillate forespørsler fra frontend
 app.use('/*', cors());
 
-// Fix for __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const filePath = path.join(__dirname, './data/projects.json');
 
-// Rute for å hente prosjekter fra JSON-filen
+// GET: Hent alle prosjekter
+
+app.get('/', (c) => {
+  return c.text('Welcome to the Project API!');
+});
+
 app.get('/projects', async (c) => {
   try {
-    const filePath = path.join(__dirname, '../data/projects.json');
     const fileData = fs.readFileSync(filePath, 'utf-8');
     const projects = JSON.parse(fileData);
-
-    return c.json(projects);
+    return c.json({ success: true, data: projects });
   } catch (error) {
     console.error('Error reading projects file:', error);
     return c.json({ success: false, message: 'Could not load projects' }, 500);
   }
 });
 
-// Rute for å opprette et nytt prosjekt
+// POST: Opprett nytt prosjekt
 app.post('/projects', async (c) => {
   try {
     const newProject = await c.req.json();
-    const filePath = path.join(__dirname, '../data/projects.json');
     const fileData = fs.readFileSync(filePath, 'utf-8');
     const projects = JSON.parse(fileData);
-
-    // Legg til det nye prosjektet og skriv tilbake til filen
     newProject.id = projects.length ? projects[projects.length - 1].id + 1 : 1;
+    newProject.publishedAt = new Date().toISOString();
     projects.push(newProject);
     fs.writeFileSync(filePath, JSON.stringify(projects, null, 2));
-
     return c.json({ success: true, project: newProject }, 201);
   } catch (error) {
-    console.error('Error oppretting prosjekt:', error);
-    return c.json({ success: false, message: 'Kunne ikke opprette prosjekt' }, 500);
+    console.error('Error creating project:', error);
+    return c.json({ success: false, message: 'Could not create project' }, 500);
+  }
+});
+
+// PUT: Oppdater et prosjekt
+app.put('/projects/:id', async (c) => {
+  try {
+    const projectId = parseInt(c.req.param('id'), 10);
+    const updatedProject = await c.req.json();
+    const fileData = fs.readFileSync(filePath, 'utf-8');
+    let projects = JSON.parse(fileData);
+    projects = projects.map((p: any) => (p.id === projectId ? { ...p, ...updatedProject } : p));
+    fs.writeFileSync(filePath, JSON.stringify(projects, null, 2));
+    return c.json({ success: true, project: updatedProject });
+  } catch (error) {
+    console.error('Error updating project:', error);
+    return c.json({ success: false, message: 'Could not update project' }, 500);
+  }
+});
+
+// DELETE: Slett et prosjekt
+app.delete('/projects/:id', async (c) => {
+  try {
+    const projectId = parseInt(c.req.param('id'), 10);
+    const fileData = fs.readFileSync(filePath, 'utf-8');
+    let projects = JSON.parse(fileData);
+    projects = projects.filter((p: any) => p.id !== projectId);
+    fs.writeFileSync(filePath, JSON.stringify(projects, null, 2));
+    return c.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting project:', error);
+    return c.json({ success: false, message: 'Could not delete project' }, 500);
   }
 });
 
