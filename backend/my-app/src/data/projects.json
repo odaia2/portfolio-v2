@@ -25,27 +25,15 @@
     "url": "https://github.com/odaia2/portfolio-v2/tree/test"
   },
   {
-    "id": 3,
-    "name": "Fullført Prosjekt",
-    "description": "Messi.",
-    "status": "Utkast",
-    "public": false,
-    "tags": [
-      "fullført"
-    ],
-    "publishedAt": "2023-12-01T00:00:00.000Z",
-    "url": "https://github.com/odaia2/portfolio-v2/tree/test"
-  },
-  {
-    "name": "Odai haha",
-    "description": "kokook",
+    "name": "Odai",
+    "description": "Ya habibi",
     "status": "published",
     "public": true,
     "tags": [
       "fullført"
     ],
-    "url": "https://github.com/odaia2/Webapp2024",
-    "id": 4,
-    "publishedAt": "2024-10-28T17:17:03.478Z"
+    "url": "https://github.com/odaia2/LiveOppgave5",
+    "id": 3,
+    "publishedAt": "2024-10-29T11:59:23.513Z"
   }
 ]

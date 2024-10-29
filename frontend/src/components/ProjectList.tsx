@@ -19,7 +19,7 @@ const ProjectList: FC<ProjectListProps> = ({ projects, onDeleteProject }) => {
         {projects.map((project, index) => (
           <article key={index} className="project-card">
             <div className="project-details">
-              {/* Tittelen er klikkbar hvis URL finnes */}
+              
               <h3>
                 {project.url ? (
                   <a href={project.url} target="_blank" rel="noopener noreferrer">

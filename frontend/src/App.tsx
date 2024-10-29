@@ -1,28 +1,19 @@
-import { useState } from 'react';
-import { useProjects } from './hooks/useProjects';
-import ProjectList from './components/ProjectList';
-import CreateProject from './components/CreateProject';
-import Header from './components/Header';
-import Nav from './components/Nav';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import ProjectListPage from './pages/ProjectListPage';
+import CreateProjectPage from './pages/CreateProjectPage';
 import './Style/Style.css';
 
 export default function App() {
-  const { projects, addProject, deleteProject } = useProjects();
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
   return (
-    <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
-      <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-      <Nav />
-      <main>
-        <ProjectList projects={projects} onDeleteProject={deleteProject} />
-        <CreateProject addProject={addProject} />
-      </main>
-      <footer>Prosjektportefølje</footer>
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<h2>Velkommen til Prosjektportefølje</h2>} />
+          <Route path="/projects" element={<ProjectListPage />} />
+          <Route path="/create-project" element={<CreateProjectPage />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }

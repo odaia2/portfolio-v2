@@ -21,14 +21,14 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
       status,
       public: isPublic,
       tags: tags.split(',').map((tag) => tag.trim()),
-      url,  // Legg til url når prosjektet opprettes
+      url,  
     });
     setTitle('');
     setDescription('');
     setStatus('draft');
     setIsPublic(false);
     setTags('');
-    setUrl('');  // Tøm URL-feltet etter innsending
+    setUrl('');  
   };
 
   return (
