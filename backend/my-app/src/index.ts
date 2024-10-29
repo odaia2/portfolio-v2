@@ -12,11 +12,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const filePath = path.join(__dirname, './data/projects.json');
 
-// Velkomstmelding
-app.get('/', (c) => {
-  return c.text('Welcome to the Project API!');
-});
-
 // GET: Hent alle prosjekter
 app.get('/projects', async (c) => {
   try {

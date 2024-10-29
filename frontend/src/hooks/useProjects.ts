@@ -10,30 +10,40 @@ type Project = {
   public: boolean;
   tags: string[];
   publishedAt: string;
+  url?: string;  
 };
 
 export const useProjects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await ofetch<{ data: Project[] }>(`${API_BASE_URL}/projects`);
+  const fetchProjects = async () => {
+    try {
+      const response = await ofetch<{ success: boolean; data: Project[] }>(`${API_BASE_URL}/projects`);
+      if (response.success) {
         setProjects(response.data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
+      } else {
+        console.error("Failed to fetch projects:", response);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchProjects();
   }, []);
 
   const addProject = async (project: Omit<Project, 'id' | 'publishedAt'>) => {
     try {
-      const response = await ofetch<{ project: Project }>(`${API_BASE_URL}/projects`, {
+      const response = await ofetch<{ success: boolean; project: Project }>(`${API_BASE_URL}/projects`, {
         method: 'POST',
         body: project,
       });
-      setProjects((prev) => [...prev, response.project]);
+      if (response.success) {
+        setProjects((prev) => [...prev, response.project]);
+      } else {
+        console.error("Failed to add project:", response);
+      }
     } catch (error) {
       console.error("Error adding project:", error);
     }
@@ -41,8 +51,14 @@ export const useProjects = () => {
 
   const deleteProject = async (id: number) => {
     try {
-      await ofetch(`${API_BASE_URL}/projects/${id}`, { method: 'DELETE' });
-      setProjects((prev) => prev.filter((project) => project.id !== id));
+      const response = await ofetch<{ success: boolean }>(`${API_BASE_URL}/projects/${id}`, {
+        method: 'DELETE',
+      });
+      if (response.success) {
+        setProjects((prev) => prev.filter((project) => project.id !== id));
+      } else {
+        console.error("Failed to delete project:", response);
+      }
     } catch (error) {
       console.error("Error deleting project:", error);
     }

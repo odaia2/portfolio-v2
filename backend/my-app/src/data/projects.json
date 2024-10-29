@@ -35,5 +35,17 @@
     "url": "https://github.com/odaia2/LiveOppgave5",
     "id": 3,
     "publishedAt": "2024-10-29T11:59:23.513Z"
+  },
+  {
+    "name": "odai",
+    "description": "kokookk",
+    "status": "published",
+    "public": true,
+    "tags": [
+      "fullført"
+    ],
+    "url": "https://github.com/odaia2/LiveOppgave5",
+    "id": 4,
+    "publishedAt": "2024-10-29T12:28:56.124Z"
   }
 ]
