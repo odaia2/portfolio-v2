@@ -9,7 +9,8 @@
       "eksempel",
       "demo"
     ],
-    "publishedAt": "2024-01-01T00:00:00.000Z"
+    "publishedAt": "2024-01-01T00:00:00.000Z",
+    "url": "https://github.com/odaia2/portfolio-v2/tree/test"
   },
   {
     "id": 2,
@@ -20,7 +21,8 @@
     "tags": [
       "fullført"
     ],
-    "publishedAt": "2023-12-01T00:00:00.000Z"
+    "publishedAt": "2023-12-01T00:00:00.000Z",
+    "url": "https://github.com/odaia2/portfolio-v2/tree/test"
   },
   {
     "id": 3,
@@ -31,17 +33,19 @@
     "tags": [
       "fullført"
     ],
-    "publishedAt": "2023-12-01T00:00:00.000Z"
+    "publishedAt": "2023-12-01T00:00:00.000Z",
+    "url": "https://github.com/odaia2/portfolio-v2/tree/test"
   },
   {
-    "name": "Odai",
-    "description": "Hahaha",
+    "name": "Odai haha",
+    "description": "kokook",
     "status": "published",
     "public": true,
     "tags": [
       "fullført"
     ],
+    "url": "https://github.com/odaia2/Webapp2024",
     "id": 4,
-    "publishedAt": "2024-10-28T10:25:56.405Z"
+    "publishedAt": "2024-10-28T17:17:03.478Z"
   }
 ]

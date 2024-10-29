@@ -1,4 +1,3 @@
-// src/components/CreateProject.tsx
 import React, { useState } from 'react';
 import { Project } from '../types';
 
@@ -12,6 +11,7 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
   const [status, setStatus] = useState('draft');
   const [isPublic, setIsPublic] = useState(false);
   const [tags, setTags] = useState('');
+  const [url, setUrl] = useState('');  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,12 +21,14 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
       status,
       public: isPublic,
       tags: tags.split(',').map((tag) => tag.trim()),
+      url,  // Legg til url når prosjektet opprettes
     });
     setTitle('');
     setDescription('');
     setStatus('draft');
     setIsPublic(false);
     setTags('');
+    setUrl('');  // Tøm URL-feltet etter innsending
   };
 
   return (
@@ -74,6 +76,17 @@ export default function CreateProject({ addProject }: CreateProjectProps) {
           name="tags"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
+          placeholder="Skriv inn tags, separert med komma"
+        />
+
+        <label htmlFor="url">URL:</label>
+        <input
+          type="text"
+          id="url"
+          name="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="Skriv prosjektets URL..."
         />
 
         <button type="submit">Opprett prosjekt</button>

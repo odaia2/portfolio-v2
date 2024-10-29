@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useProjects } from './hooks/useProjects';
 import ProjectList from './components/ProjectList';
 import CreateProject from './components/CreateProject';
@@ -7,7 +7,7 @@ import Nav from './components/Nav';
 import './Style/Style.css';
 
 export default function App() {
-  const { projects, addProject } = useProjects();
+  const { projects, addProject, deleteProject } = useProjects();
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
@@ -19,7 +19,7 @@ export default function App() {
       <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
       <Nav />
       <main>
-        <ProjectList projects={projects} />
+        <ProjectList projects={projects} onDeleteProject={deleteProject} />
         <CreateProject addProject={addProject} />
       </main>
       <footer>Prosjektportefølje</footer>

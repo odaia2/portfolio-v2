@@ -289,39 +289,74 @@ footer {
   padding: 20px;
 }
 
+#project-list{
+  margin-bottom: 10px;
+}
 .project-card {
   background-color: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
   color: var(--text-color); 
+  padding: 20px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .project-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-.project-card img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+.project-details h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 10px;
 }
 
+.project-details h3 a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.project-details h3 a:hover {
+  color: var(--accent-color);
+}
+
+.project-details p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.project-details p:last-child {
+  margin-bottom: 0;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.project-tag {
+  background-color: var(--accent-bg);
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: 500;
+}
 .project-content {
   padding: 15px;
 }
 
-.project-content h3 {
-  margin: 0 0 10px;
-  color: var(--text-color); 
-}
-
-.project-content p {
-  margin: 5px 0;
-  color: #555;
-}
 
 .dark-mode .project-content p {
   color: #bdc3c7; 
@@ -332,4 +367,32 @@ footer {
   color: green;
   font-weight: bold;
   font-size: 1rem;
+}
+
+#create-project{
+  width: 60%; 
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+
+
+.delete-button {
+  background-color:var(--text-color);
+  color:var(--bg-color);
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
 }

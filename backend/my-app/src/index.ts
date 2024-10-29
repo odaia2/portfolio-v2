@@ -12,12 +12,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const filePath = path.join(__dirname, './data/projects.json');
 
-// GET: Hent alle prosjekter
-
+// Velkomstmelding
 app.get('/', (c) => {
   return c.text('Welcome to the Project API!');
 });
 
+// GET: Hent alle prosjekter
 app.get('/projects', async (c) => {
   try {
     const fileData = fs.readFileSync(filePath, 'utf-8');
@@ -43,22 +43,6 @@ app.post('/projects', async (c) => {
   } catch (error) {
     console.error('Error creating project:', error);
     return c.json({ success: false, message: 'Could not create project' }, 500);
-  }
-});
-
-// PUT: Oppdater et prosjekt
-app.put('/projects/:id', async (c) => {
-  try {
-    const projectId = parseInt(c.req.param('id'), 10);
-    const updatedProject = await c.req.json();
-    const fileData = fs.readFileSync(filePath, 'utf-8');
-    let projects = JSON.parse(fileData);
-    projects = projects.map((p: any) => (p.id === projectId ? { ...p, ...updatedProject } : p));
-    fs.writeFileSync(filePath, JSON.stringify(projects, null, 2));
-    return c.json({ success: true, project: updatedProject });
-  } catch (error) {
-    console.error('Error updating project:', error);
-    return c.json({ success: false, message: 'Could not update project' }, 500);
   }
 });
 

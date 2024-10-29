@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ofetch } from 'ofetch';
 import { API_BASE_URL } from '../ config/urls';
-import { PROJECTS_URL } from '../ config/urls';
 
 type Project = {
   id?: number;
@@ -30,7 +29,7 @@ export const useProjects = () => {
 
   const addProject = async (project: Omit<Project, 'id' | 'publishedAt'>) => {
     try {
-      const response = await ofetch(`${API_BASE_URL}/projects`, {
+      const response = await ofetch<{ project: Project }>(`${API_BASE_URL}/projects`, {
         method: 'POST',
         body: project,
       });
@@ -40,5 +39,14 @@ export const useProjects = () => {
     }
   };
 
-  return { projects, addProject };
+  const deleteProject = async (id: number) => {
+    try {
+      await ofetch(`${API_BASE_URL}/projects/${id}`, { method: 'DELETE' });
+      setProjects((prev) => prev.filter((project) => project.id !== id));
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
+  };
+
+  return { projects, addProject, deleteProject };
 };
