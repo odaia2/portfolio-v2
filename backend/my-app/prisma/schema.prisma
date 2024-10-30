@@ -24,4 +24,3 @@ model Project {
   tags        String[] // Representeres som en liste av strenger
   publishedAt DateTime?
 }
-
