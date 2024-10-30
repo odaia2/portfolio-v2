@@ -14,7 +14,7 @@ export default function App() {
             path="/" 
             element={
               <>
-                <h2>Velkommen til Prosjektportefølje</h2>
+                <h2>Velkommen til Prosjektportefølje.</h2>
                 <AboutMe /> {/* Legg til AboutMe på hovedsiden */}
               </>
             } 
