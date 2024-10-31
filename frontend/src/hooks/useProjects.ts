@@ -2,19 +2,20 @@ import { useState, useEffect } from 'react';
 import { ofetch } from 'ofetch';
 import { API_BASE_URL } from '../ config/urls';
 
+// Pass på at typen Project er definert
 type Project = {
-  id?: number;
+  id: number;
   name: string;
   description: string;
   status: string;
   public: boolean;
   tags: string[];
   publishedAt: string;
-  url?: string;  
+  url?: string;
 };
 
 export const useProjects = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);  // Legger til type Project[]
 
   const fetchProjects = async () => {
     try {
@@ -35,12 +36,12 @@ export const useProjects = () => {
 
   const addProject = async (project: Omit<Project, 'id' | 'publishedAt'>) => {
     try {
-      const response = await ofetch<{ success: boolean; project: Project }>(`${API_BASE_URL}/projects`, {
+      const response = await ofetch<{ success: boolean; data: Project }>(`${API_BASE_URL}/projects`, {
         method: 'POST',
         body: project,
       });
       if (response.success) {
-        setProjects((prev) => [...prev, response.project]);
+        setProjects((prev) => [...prev, response.data]);
       } else {
         console.error("Failed to add project:", response);
       }
